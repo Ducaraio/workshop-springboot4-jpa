@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +23,6 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	
 	
 	@ManyToMany (mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
@@ -55,6 +57,7 @@ public class Category implements Serializable{
 		return Objects.hash(id);
 	}
 	
+	@JsonIgnore
 	public Set<Product> getProdutos() {
 		return products;
 	}
